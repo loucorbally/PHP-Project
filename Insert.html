@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+        <?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "hardwaresales";
+        
+        // Create connection
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        // Check connection
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        
+        // Escape user inputs for security
+        
+        $DEPTNO = $_POST['client_name'];
+        
+        $DNAME = $_POST['client_addr'];
+        
+        $LOC = $_POST ['other_client_details'];
+        
+         
+        
+        // attempt insert query execution
+        
+        mysqli_query($conn, "INSERT INTO client_name (client_name, client_addr, other_client_details) VALUES ('$client_name', '$client_addr', '$other_client_details')");
+        
+        if(mysqli_affected_rows($conn)>0){
+        
+            echo "Records added successfully.";
+        
+        } else{
+        
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        
+        }
+        
+        
+        // close connection
+        
+        mysqli_close($conn);
+        
+        ?>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Hardware Sales</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+
+    <main>
+        <h1>Enter Client Information Here:</h1>
+        <form action="phpform.php" method="post">
+
+            <div id="data">
+                <label>Client Name:</label>
+                <input type="text" name="client_name"><br>
+
+                <label>Client Address:</label>
+                <input type="text" name="client_addr"><br>
+
+                <label>Increase:</label>
+                <input type="text" name="other_client_details"><span>%</span><br>
+            </div>
+
+            <div id="buttons">
+                <label>&nbsp;</label>
+                <input type="submit" value="enter_info"><br>
+            </div>
+
+        </form>
+    </main>
+
+</body>
+</html>
