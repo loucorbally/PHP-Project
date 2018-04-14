@@ -1,3 +1,38 @@
+<style>
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+</style>
+</head>
+<body>
+
+<ul>
+  <li><a class="active" href="Insert.php">Insert</a></li>
+  <li><a href="select.php">Select</a></li>
+  <li><a href="Update.php">Update</a></li>
+  <li><a href="delete.php">Delete</a></li>
+</ul>
+
 <?php
 
 // Check if the user has submitted data into the form
@@ -12,8 +47,8 @@ if (isset ($_POST ['submit'])){
 			//Connect to the server and the empdept2 database
 			$servername = "localhost";
 			$username = "root";
-			$password = "";
-			$dbname = "empdept2";
+			$password = "root";
+			$dbname = "HardwareSales";
 
 				// Create connection
 				$conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -43,11 +78,13 @@ if (isset ($_POST ['submit'])){
 	<title>Update Example</title>
 </head> 
 <body>
-<h2> Update Department Location </h2><br /><br />
-<form action ="UPDATEDB.php" method ="POST">
+<h2> Update Client or Purchase Details</h2><br /><br />
+<form action ="Update.php" method ="POST">
 <table>
-<tr><td>Dept No:</td> <td> <input type ="text" id="deptno" name="deptno"> </td></tr>
-<tr><td>Location:</td> <td> <input type ="text" id="loc" name="loc"> </td></tr>
+<tr><td>Client Name:</td> <td> <input type ="text" id="client_name" name="client_name"> </td></tr>
+<tr><td>Client Address:</td> <td> <input type ="text" id="client_addr" name="client_addr"> </td></tr>
+<tr><td>Item Ordered:</td> <td> <input type ="text" id="item_ordered" name="item_ordered"> </td></tr>
+
 <tr><td><input type ="submit" id="submit" name="submit" value = "Update Location"></td></tr>
 </table>
 </form>
