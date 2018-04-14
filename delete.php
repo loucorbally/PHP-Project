@@ -58,7 +58,7 @@ $result=mysqli_query($conn, "SELECT * FROM client");
 	<tr>
 		<th>Client Name</th>
 		<th>Client Address</th>
-		<th>Other Client Details</th>
+		<th>Other Details</th>
 		<th>Delete</th>
 		<th></th>
 	<tr>
@@ -91,7 +91,7 @@ while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
 	if(isset($_GET['delete'])){
 		$delete_id= $_GET['delete'];
 		
-		mysqli_query($conn, "DELETE FROM DEPT WHERE client = '$delete_id'");
+		mysqli_query($conn, "DELETE FROM client WHERE client_name = '$delete_id'");
 		
 		header("location: delete.php");
 	}

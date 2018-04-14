@@ -38,11 +38,11 @@ li a:hover {
 // Check if the user has submitted data into the form
 
 if (isset ($_POST ['submit'])){
-	$deptno = $_POST ['deptno'];
-	$loc = $_POST ['loc'];
+	$client_name = $_POST ['client_name'];
+	$client_addr = $_POST ['client_addr'];
 	
 	//Check if both fields have been entered
-	if ($deptno && $loc){
+	if ($client_name && $client_addr){
 		
 			//Connect to the server and the empdept2 database
 			$servername = "localhost";
@@ -58,19 +58,26 @@ if (isset ($_POST ['submit'])){
 								}
 	
 	// Check if that department exists
-	$exists= mysqli_query ($conn,"SELECT * FROM dept WHERE DEPTNO = '$deptno' ") or die ("Query could not be completed");
+	$exists= mysqli_query ($conn,"SELECT * FROM client WHERE client_name = '$client_name' ") or die ("Query could not be completed");
 	
-	// Update the location field in the DEPT table
+	// Update the location field in the client table
 	if (mysqli_num_rows($exists) !=0){
-		mysqli_query ($conn,"UPDATE DEPT SET LOC = '$loc' WHERE DEPTNO = '$deptno'") or die ("Update could not be applied");
+		mysqli_query ($conn,"UPDATE client SET client_addr = '$client_addr' WHERE client_name = '$client_name'") or die ("Update could not be applied");
 		echo "Successful Location Updated";
 			}else echo "That Dept No does not exist.  Please re-enter:";
 					}else echo "You must enter values for both fields.  Please re-enter";
-		
-		
-		
-		
-	}
+		}
+	
+
+
+		if (mysqli_num_rows($exists) !=0){
+			mysqli_query ($conn,"UPDATE client SET other_client_details = '$other_client_details' WHERE client_name = '$client_name'") or die ("Update could not be applied");
+			echo "Successful Location Updated";
+				}else echo "That Dept No does not exist.  Please re-enter:";
+						
+			
+
+					
 	
 ?>
 <html>
@@ -78,12 +85,14 @@ if (isset ($_POST ['submit'])){
 	<title>Update Example</title>
 </head> 
 <body>
-<h2> Update Client or Purchase Details</h2><br /><br />
+<h2> Update Client Address</h2><br /><br />
 <form action ="Update.php" method ="POST">
 <table>
 <tr><td>Client Name:</td> <td> <input type ="text" id="client_name" name="client_name"> </td></tr>
 <tr><td>Client Address:</td> <td> <input type ="text" id="client_addr" name="client_addr"> </td></tr>
-<tr><td>Item Ordered:</td> <td> <input type ="text" id="item_ordered" name="item_ordered"> </td></tr>
+<tr><td>Other Client Details:</td><td><input type ="text" id="other_client_details" name="other_client_details"></td></tr>
+                
+
 
 <tr><td><input type ="submit" id="submit" name="submit" value = "Update Location"></td></tr>
 </table>
